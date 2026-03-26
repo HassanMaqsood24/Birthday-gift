@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -36,15 +36,36 @@
     }
 
     .date {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #ffd700;
-      text-shadow: 2px 2px 10px #ff69b4, 0 0 20px #ff69b4;
-      margin-bottom: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+
+    .march-text {
+      color: #ffd700; /* bright gold color */
+      font-weight: 900;
+      text-shadow: 0 0 5px #fff8;
+      font-size: 2.5rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .sparkle {
+      display: inline-block;
+      font-size: 1.5rem;
+      animation: sparkleAnim 1.5s infinite alternate;
+    }
+    .sparkle1 { animation-delay: 0s; }
+    .sparkle2 { animation-delay: 0.7s; }
+
+    @keyframes sparkleAnim {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-5px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.8; }
     }
 
     h1 {
@@ -90,8 +111,10 @@
       #countdown { font-size: 2rem; }
       h1 { font-size: 1.5rem; }
       #typing { font-size: 1rem; }
-      .date { font-size: 1.2rem; gap: 6px; }
+      .date { font-size: 2rem; gap: 6px; }
+      .sparkle { font-size: 1.2rem; }
       .time-labels { font-size: 0.8rem; gap: 8px; }
+      .march-text { font-size: 2rem; }
     }
 
     canvas {
@@ -107,8 +130,9 @@
 <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
   <div class="card text-center">
     <div class="date">
-      <img src="https://em-content.zobj.net/thumbs/120/apple/325/calendar_1f4c5.png" alt="Calendar" style="width:30px; vertical-align:middle;">
-      27 March
+      <span class="sparkle sparkle1">✨</span>
+      <span class="march-text">27 March</span>
+      <span class="sparkle sparkle2">🎈</span>
     </div>
 
     <h1>🎂 Aisha, it's your Birthday!</h1>
