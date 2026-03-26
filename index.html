@@ -66,6 +66,15 @@
       color: #ff5f6d;
     }
 
+    .time-labels {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: #fff8;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
     #typing {
       font-size: 1.2rem;
       margin-top: 15px;
@@ -78,6 +87,7 @@
       h1 { font-size: 1.5rem; }
       #typing { font-size: 1rem; }
       .date { font-size: 1.2rem; }
+      .time-labels { font-size: 0.8rem; gap: 8px; }
     }
 
     canvas {
@@ -98,6 +108,7 @@
     <div id="typing"></div>
 
     <div id="countdown">Loading...</div>
+    <div class="time-labels">Hours&nbsp;&nbsp;Minutes&nbsp;&nbsp;Seconds</div>
   </div>
 </div>
 
@@ -106,7 +117,6 @@
 
 <script>
   const countdownEl = document.getElementById("countdown");
-
   const typingText = "Hassan is waiting for your Birthday... A special gift card for you! 🎁";
   let index = 0;
   const typingEl = document.getElementById("typing");
@@ -118,7 +128,6 @@
       setTimeout(typeEffect, 50);
     }
   }
-
   typeEffect();
 
   const targetDate = new Date("March 27, 2026 00:00:00").getTime();
@@ -126,22 +135,15 @@
   function updateCountdown() {
     const now = new Date().getTime();
     const diff = targetDate - now;
-
     if (diff <= 0) {
       countdownEl.innerHTML = "🎉 Surprise Time! 🎈";
       startConfetti();
       return;
     }
-
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    const h = String(hours).padStart(2, '0');
-    const m = String(minutes).padStart(2, '0');
-    const s = String(seconds).padStart(2, '0');
-
-    countdownEl.innerHTML = `${h}:${m}:${s}`;
+    countdownEl.innerHTML = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
   }
 
   setInterval(updateCountdown, 1000);
@@ -149,105 +151,32 @@
   // Confetti
   const canvas = document.getElementById('confetti');
   const ctx = canvas.getContext('2d');
-
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
   let confetti = [];
 
   function randomColor() {
-    const colors = ['#ff6f91', '#ff9671', '#ffc75f', '#f9f871', '#a0e7e5', '#43e97b', '#38f9d7'];
-    return colors[Math.floor(Math.random() * colors.length)];
+    const colors = ['#ff6f91','#ff9671','#ffc75f','#f9f871','#a0e7e5','#43e97b','#38f9d7'];
+    return colors[Math.floor(Math.random()*colors.length)];
   }
 
-  function createConfetti() {
-    for (let i = 0; i < 200; i++) {
-      confetti.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height - canvas.height,
-        r: Math.random() * 8 + 2,
-        d: Math.random() * 50,
-        color: randomColor()
-      });
-    }
-  }
-
-  function drawConfetti() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    confetti.forEach((c, i) => {
-      ctx.fillStyle = c.color;
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    updateConfetti();
-  }
-
-  function updateConfetti() {
-    confetti.forEach((c, i) => {
-      c.y += Math.cos(c.d) + 2;
-      c.x += Math.sin(c.d);
-      if (c.y > canvas.height) {
-        confetti[i] = {
-          x: Math.random() * canvas.width,
-          y: -10,
-          r: c.r,
-          d: c.d,
-          color: c.color
-        };
-      }
-    });
-  }
-
-  function startConfetti() {
-    createConfetti();
-    setInterval(drawConfetti, 20);
-  }
+  function createConfetti(){for(let i=0;i<200;i++){confetti.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*8+2,d:Math.random()*50,color:randomColor()});}}
+  function drawConfetti(){ctx.clearRect(0,0,canvas.width,canvas.height);confetti.forEach(c=>{ctx.fillStyle=c.color;ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.fill();});updateConfetti();}
+  function updateConfetti(){confetti.forEach((c,i)=>{c.y+=Math.cos(c.d)+2;c.x+=Math.sin(c.d);if(c.y>canvas.height){confetti[i]={x:Math.random()*canvas.width,y:-10,r:c.r,d:c.d,color:c.color};}});}
+  function startConfetti(){createConfetti();setInterval(drawConfetti,20);}
 
   // Balloons animation
   const balloonCanvas = document.getElementById('balloons');
   const bctx = balloonCanvas.getContext('2d');
   balloonCanvas.width = window.innerWidth;
   balloonCanvas.height = window.innerHeight;
-
-  let balloons = [];
-  function createBalloons() {
-    for (let i = 0; i < 20; i++) {
-      balloons.push({
-        x: Math.random() * balloonCanvas.width,
-        y: balloonCanvas.height + Math.random() * 300,
-        r: 20 + Math.random() * 15,
-        color: randomColor(),
-        speed: 1 + Math.random() * 2
-      });
-    }
-  }
-
-  function drawBalloons() {
-    bctx.clearRect(0, 0, balloonCanvas.width, balloonCanvas.height);
-    balloons.forEach((b) => {
-      bctx.fillStyle = b.color;
-      bctx.beginPath();
-      bctx.ellipse(b.x, b.y, b.r*0.7, b.r, 0, 0, Math.PI*2);
-      bctx.fill();
-      b.y -= b.speed;
-      if (b.y < -50) {
-        b.y = balloonCanvas.height + Math.random() * 100;
-        b.x = Math.random() * balloonCanvas.width;
-      }
-    });
-    requestAnimationFrame(drawBalloons);
-  }
-
+  let balloons=[];
+  function createBalloons(){for(let i=0;i<20;i++){balloons.push({x:Math.random()*balloonCanvas.width,y:balloonCanvas.height+Math.random()*300,r:20+Math.random()*15,color:randomColor(),speed:1+Math.random()*2});}}
+  function drawBalloons(){bctx.clearRect(0,0,balloonCanvas.width,balloonCanvas.height);balloons.forEach(b=>{bctx.fillStyle=b.color;bctx.beginPath();bctx.ellipse(b.x,b.y,b.r*0.7,b.r,0,0,Math.PI*2);bctx.fill();b.y-=b.speed;if(b.y<-50){b.y=balloonCanvas.height+Math.random()*100;b.x=Math.random()*balloonCanvas.width;}});requestAnimationFrame(drawBalloons);}
   createBalloons();
   drawBalloons();
 
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    balloonCanvas.width = window.innerWidth;
-    balloonCanvas.height = window.innerHeight;
-  });
+  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;balloonCanvas.width=window.innerWidth;balloonCanvas.height=window.innerHeight;});
 </script>
 
 </body>
