@@ -143,7 +143,7 @@ canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1; }
 <canvas id="balloons"></canvas>
 
 <script>
-const typingText = "Hassan is waiting for your Birthday... 🎁";
+const typingText = "Hassan is waiting for your Birthday There is a special gift-card for you... 🎁";
 let index = 0;
 const typingEl = document.getElementById("typing");
 function typeEffect() {
@@ -262,7 +262,7 @@ function checkFinal(){
 
     // 🎁 Beautiful buttons
     giftContainer.innerHTML=`
-      <div class="giftCardBox" onclick="alert('🎂 Birthday Message 🎂')">🎂 Birthday Message</div>
+      <div class="giftCardBox" onclick="showBirthdayMessage()">🎂 Birthday Message</div>
       <div class="giftCardBox" onclick="alert('🎮 Fun Game 🎮')">🎮 Fun Game</div>
     `;
 
@@ -292,6 +292,35 @@ let balloons=[];
 function createBalloons(){for(let i=0;i<20;i++){balloons.push({x:Math.random()*balloonCanvas.width,y:balloonCanvas.height+Math.random()*300,r:20+Math.random()*15,color:randomColor(),speed:1+Math.random()*2});}}
 function drawBalloons(){bctx.clearRect(0,0,balloonCanvas.width,balloonCanvas.height); balloons.forEach(b=>{bctx.fillStyle=b.color;bctx.beginPath();bctx.ellipse(b.x,b.y,b.r*0.7,b.r,0,0,Math.PI*2);bctx.fill(); b.y-=b.speed;if(b.y<-50)b.y=balloonCanvas.height;}); requestAnimationFrame(drawBalloons);}
 createBalloons(); drawBalloons();
+
+function showBirthdayMessage(){
+
+  const finalMsg = document.getElementById("finalMsg");
+  const giftContainer = document.getElementById("giftCardContainer");
+
+  // Hide buttons
+  giftContainer.innerHTML = "";
+
+  // Beautiful long message
+  finalMsg.innerHTML = `
+    <h3 style="font-weight:900;">🎂 Happy Birthday Aisha ❤️</h3>
+    <p style="margin-top:15px; line-height:1.6; font-size:1rem;">
+    Aaj ka din mere liye bohat special hai, kyunki aaj wo din hai jab duniya ko tum jaisi beautiful aur amazing insan mili ❤️  
+    Aisha, tum sirf ek naam nahi ho… tum ek feeling ho, ek sukoon ho, ek smile ho jo bina wajah bhi aa jati hai 😊  
+
+    Jab se tum meri life mein aayi ho, sab kuch change ho gaya hai. Har din thoda zyada beautiful lagta hai, har moment thoda zyada special ho jata hai.  
+    Tumhari baatein, tumhari hasi, tumhara style… sab kuch literally perfect hai 💫  
+
+    Main chahta hoon ke tum hamesha aise hi khush raho, smile karti raho aur apni life ke har dream ko achieve karo.  
+    Aur haan… ek chhoti si selfish wish bhi hai meri 😌  
+    ke main hamesha tumhari life ka part rahun… tumhari khushiyon ka reason banun ❤️  
+
+    I love you so much Aishu 💖  
+    Aur aaj ke din bas yehi kehna hai…  
+    Happy Birthday meri jaan 🎉🎂✨
+    </p>
+  `;
+}
 
 window.addEventListener('resize',()=>{canvas.width=balloonCanvas.width=window.innerWidth; canvas.height=balloonCanvas.height=window.innerHeight;});
 </script>
