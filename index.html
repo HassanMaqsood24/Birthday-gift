@@ -11,13 +11,14 @@
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  height: 100vh;
+  min-height: 100vh; /* 🔥 important */
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
-  overflow: hidden;
+  overflow-y: auto; /* ✅ allow scroll */
+  padding: 15px;
 }
 
 .card {
@@ -30,6 +31,8 @@ body {
   width: 90%;
   position: relative;
   z-index: 2;
+max-height: 90vh;   /* ✅ limit height */
+  overflow-y: auto;   /* ✅ scroll inside card */
 }
 
 .hidden { display: none; }
@@ -84,6 +87,38 @@ canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1; }
   #countdown { font-size: 2rem; }
   .march-text { font-size: 2rem; }
 }
+
+@media (max-width: 576px) {
+
+  .card {
+    padding: 20px;
+    max-height: 85vh;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+  }
+
+  input[type=text] {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .question-btn {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  #finalMsg p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
 .toast {
   position: fixed;
   top: 20px;
