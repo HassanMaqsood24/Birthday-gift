@@ -1,213 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aisha's Birthday 🎉</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aisha's Birthday 🎉</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
+.card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 25px;
+  padding: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  z-index: 2;
+}
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      overflow: hidden;
-    }
+.hidden { display: none; }
 
-    .card {
-      background: rgba(255,255,255,0.15);
-      border-radius: 25px;
-      padding: 40px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      animation: fadeIn 1.5s ease-in-out;
-      max-width: 500px;
-      position: relative;
-    }
+.date { display: flex; justify-content: center; align-items: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; gap: 10px; }
+.march-text { color: #ffd700; font-weight: 900; font-size: 2.5rem; }
 
-    .date {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 15px;
-      gap: 10px;
-    }
+#countdown { font-size: 2.5rem; margin-top: 15px; color: #ff5f6d; }
 
-    .march-text {
-      color: #ffd700; /* bright gold color */
-      font-weight: 900;
-      text-shadow: 0 0 5px #fff8;
-      font-size: 2.5rem;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+.question-btn {
+  background: linear-gradient(45deg,#ff9a9e,#fad0c4);
+  border: none;
+  margin: 10px 0;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 15px;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.question-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
 
-    .sparkle {
-      display: inline-block;
-      font-size: 1.5rem;
-      animation: sparkleAnim 1.5s infinite alternate;
-    }
-    .sparkle1 { animation-delay: 0s; }
-    .sparkle2 { animation-delay: 0.7s; }
+input[type=text] {
+  width: 90%;
+  margin: 15px auto;
+  display: block;
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  font-size: 1.2rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
-    @keyframes sparkleAnim {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-5px) scale(1.2); opacity: 1; }
-      100% { transform: translateY(0) scale(1); opacity: 0.8; }
-    }
+#giftCardContainer { margin-top:20px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
 
-    h1 {
-      font-weight: 600;
-      color: #ff3cac;
-      animation: glow 2s infinite alternate;
-    }
+.giftCardBox {
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-weight:700;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color:white;
+}
+.giftCardBox:hover { transform: scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.3); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1; }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #fff; }
-      to { text-shadow: 0 0 25px #fff; }
-    }
-
-    #countdown {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-top: 15px;
-      color: #ff5f6d;
-    }
-
-    .time-labels {
-      margin-top: 5px;
-      font-size: 0.9rem;
-      color: #fff8;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    #typing {
-      font-size: 1.2rem;
-      margin-top: 15px;
-      min-height: 60px;
-      color: #ff6f91;
-    }
-
-    @media (max-width: 576px) {
-      #countdown { font-size: 2rem; }
-      h1 { font-size: 1.5rem; }
-      #typing { font-size: 1rem; }
-      .date { font-size: 2rem; gap: 6px; }
-      .sparkle { font-size: 1.2rem; }
-      .time-labels { font-size: 0.8rem; gap: 8px; }
-      .march-text { font-size: 2rem; }
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
-  </style>
+@media (max-width: 576px) {
+  #countdown { font-size: 2rem; }
+  .march-text { font-size: 2rem; }
+}
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-weight: 700;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+  z-index: 9999;
+  color: white;
+}
+.toast.correct { background: linear-gradient(90deg,#43e97b,#38f9d7); }
+.toast.wrong { background: linear-gradient(90deg,#ff6f91,#ff9671); }
+</style>
 </head>
 <body>
 
 <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
-  <div class="card text-center">
-    <div class="date">
-      <span class="sparkle sparkle1">✨</span>
-      <span class="march-text">27 March</span>
-      <span class="sparkle sparkle2">🎈</span>
-    </div>
 
-    <h1>🎂 Aisha, it's your Birthday!</h1>
-    <div id="typing"></div>
-
-    <div id="countdown">Loading...</div>
-    <div class="time-labels">Hours&nbsp;&nbsp;Minutes&nbsp;&nbsp;Seconds</div>
+<!-- MAIN SCREEN -->
+<div class="card text-center" id="mainScreen">
+  <div class="date">
+    <span>✨</span>
+    <span class="march-text">27 March</span>
+    <span>🎈</span>
   </div>
+  <h1>🎂 Aisha, it's your Birthday!</h1>
+  <div id="typing"></div>
+  <div id="countdown">Loading...</div>
 </div>
+
+<!-- QUESTION SCREEN -->
+<div class="card text-center hidden" id="questionScreen">
+  <p style="font-size:1.1rem;margin-bottom:20px;">Are you really Aisha? Let's check with some fun questions! 🎉</p>
+  <h4 id="questionText">Question will appear here</h4>
+  <div id="answersContainer"></div>
+</div>
+
+<!-- FINAL TEXT INPUT SCREEN -->
+<div class="card text-center hidden" id="finalScreen">
+  <h4>Last & hardest question! Type the 3 words correctly:</h4>
+  <input type="text" placeholder="Word 1" id="input1">
+  <input type="text" placeholder="Word 2" id="input2">
+  <input type="text" placeholder="Word 3" id="input3">
+  <button class="question-btn w-100" onclick="checkFinal()">Submit</button>
+  <div id="finalMsg" style="margin-top:20px;"></div>
+  <div id="giftCardContainer"></div>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <canvas id="confetti"></canvas>
 <canvas id="balloons"></canvas>
 
 <script>
-  const countdownEl = document.getElementById("countdown");
-  const typingText = "Hassan is waiting for your Birthday... A special gift card for you! 🎁";
-  let index = 0;
-  const typingEl = document.getElementById("typing");
+const typingText = "Hassan is waiting for your Birthday... 🎁";
+let index = 0;
+const typingEl = document.getElementById("typing");
+function typeEffect() {
+  if(index<typingText.length){
+    typingEl.innerHTML+=typingText.charAt(index);
+    index++;
+    setTimeout(typeEffect,50);
+  }
+}
+typeEffect();
 
-  function typeEffect() {
-    if (index < typingText.length) {
-      typingEl.innerHTML += typingText.charAt(index);
-      index++;
-      setTimeout(typeEffect, 50);
+const countdownEl = document.getElementById("countdown");
+const targetDate = new Date("March 27, 2026 00:00:00").getTime();
+function updateCountdown(){
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+  if(diff<=0){
+    countdownEl.innerHTML = "🎉 Happy Birthday! 🎉";
+    typingEl.innerHTML="";
+    startConfetti();
+    setTimeout(()=>{
+      document.getElementById("mainScreen").classList.add("hidden");
+      document.getElementById("questionScreen").classList.remove("hidden");
+      balloons.forEach(b=>b.speed=0.3); 
+      balloons.forEach(b=>b.r*=0.3);
+      startQuestions();
+    },5000);
+    return;
+  }
+  const hours = Math.floor(diff / (1000*60*60));
+  const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((diff%(1000*60))/1000);
+  countdownEl.innerHTML=`${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateCountdown,1000);
+
+const questions = [
+  {question:"When we first met?",answers:["10 April 2025","5 May 2025","1 Jan 2025","14 Feb 2025"],correct:"10 April 2025"},
+  {question:"What I wore when we met?",answers:["Black Shalwar Kameez","Red Dress","White Shirt","Blue Jeans"],correct:"Black Shalwar Kameez"},
+  {question:"What date our arrangement occur?",answers:["24 May 2025","12 June 2025","10 April 2025","1 Jan 2025"],correct:"24 May 2025"},
+  {question:"What date my birthday is?",answers:["24 July","27 March","1 Jan","15 Aug"],correct:"24 July"}
+];
+
+let currentQ=0;
+const questionText=document.getElementById("questionText");
+const answersContainer=document.getElementById("answersContainer");
+const toast=document.getElementById('toast');
+
+function startQuestions(){ showQuestion(currentQ); }
+function showQuestion(index){
+  const q=questions[index];
+  questionText.innerText=q.question;
+  answersContainer.innerHTML="";
+  q.answers.forEach(ans=>{
+    const btn=document.createElement("button");
+    btn.classList.add("question-btn","w-100");
+    btn.innerText=ans;
+    btn.onclick=()=>checkAnswer(ans);
+    answersContainer.appendChild(btn);
+  });
+}
+
+function showToast(msg="Correct ✅",type="correct"){
+  toast.innerText=msg;
+  toast.className=`toast ${type} show`;
+  setTimeout(()=>{ toast.className=`toast ${type}`; },2000);
+}
+
+function checkAnswer(ans){
+  const correctAnswer = questions[currentQ].correct;
+  if(ans===correctAnswer){
+    showToast();
+    currentQ++;
+    if(currentQ<questions.length){
+      setTimeout(()=>{ showQuestion(currentQ); },1000);
+    }else{
+      setTimeout(()=>{
+        document.getElementById("questionScreen").classList.add("hidden");
+        document.getElementById("finalScreen").classList.remove("hidden");
+        balloons.forEach(b=>b.speed=0); 
+      },1000);
     }
+  }else{
+    showToast("Wrong ❌ Try again","wrong");
   }
-  typeEffect();
+}
 
-  const targetDate = new Date("March 27, 2026 00:00:00").getTime();
+function checkFinal(){
+  const inputs=[
+    document.getElementById("input1").value.trim().toLowerCase(),
+    document.getElementById("input2").value.trim().toLowerCase(),
+    document.getElementById("input3").value.trim().toLowerCase()
+  ];
 
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-    if (diff <= 0) {
-      countdownEl.innerHTML = "🎉 Surprise Time! 🎈";
-      startConfetti();
-      return;
-    }
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    countdownEl.innerHTML = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+  const answer=["jaan","aishu","cutie"];
+  const correct=answer.every(a=>inputs.includes(a));
+
+  const finalMsg=document.getElementById("finalMsg");
+  const giftContainer=document.getElementById("giftCardContainer");
+
+  if(correct){
+
+    // 🔴 Hide input fields after success
+    document.getElementById("input1").style.display="none";
+    document.getElementById("input2").style.display="none";
+    document.getElementById("input3").style.display="none";
+    document.querySelector("#finalScreen button").style.display="none";
+
+    // ✅ Only ONE clean message
+    finalMsg.innerHTML=`
+      <h3 style="font-weight:800;">🎉 Congratulations Aisha! 🎉</h3>
+      <p style="margin-top:10px;">Here is your special gift 🎁</p>
+    `;
+
+    startConfetti();
+
+    // 🎁 Beautiful buttons
+    giftContainer.innerHTML=`
+      <div class="giftCardBox" onclick="alert('🎂 Birthday Message 🎂')">🎂 Birthday Message</div>
+      <div class="giftCardBox" onclick="alert('🎮 Fun Game 🎮')">🎮 Fun Game</div>
+    `;
+
+  } else {
+    finalMsg.innerHTML=`<p style="color:#ff6f91;font-weight:700;">Incorrect ❌ Try again!</p>`;
+    giftContainer.innerHTML="";
   }
+}
 
-  setInterval(updateCountdown, 1000);
+// Confetti
+const canvas=document.getElementById('confetti');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let confetti=[];
+function randomColor(){ const colors=['#ff6f91','#ff9671','#ffc75f','#f9f871','#a0e7e5','#43e97b','#38f9d7','#ffcbf2','#ffadad']; return colors[Math.floor(Math.random()*colors.length)]; }
+function createConfetti(){for(let i=0;i<300;i++){confetti.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*8+2,d:Math.random()*50,color:randomColor(),shape:['circle','heart','star'][Math.floor(Math.random()*3)]});}}
+function drawConfetti(){ctx.clearRect(0,0,canvas.width,canvas.height); confetti.forEach(c=>{ ctx.fillStyle=c.color; ctx.beginPath(); if(c.shape==='circle'){ctx.arc(c.x,c.y,c.r,0,Math.PI*2);} else if(c.shape==='heart'){ctx.moveTo(c.x,c.y); ctx.arc(c.x-3,c.y-3,5,0,Math.PI); ctx.arc(c.x+3,c.y-3,5,0,Math.PI); ctx.lineTo(c.x,c.y+5);} else if(c.shape==='star'){for(let i=0;i<5;i++){ctx.lineTo(c.x+c.r*Math.cos((18+i*72)/180*Math.PI),c.y-c.r*Math.sin((18+i*72)/180*Math.PI));}} ctx.fill();}); updateConfetti(); }
+function updateConfetti(){confetti.forEach((c,i)=>{c.y+=2;if(c.y>canvas.height){confetti[i].y=-10;}});}
+function startConfetti(){createConfetti(); setInterval(drawConfetti,20);}
 
-  // Confetti
-  const canvas = document.getElementById('confetti');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  let confetti = [];
+// Balloons
+const balloonCanvas=document.getElementById('balloons');
+const bctx=balloonCanvas.getContext('2d');
+balloonCanvas.width=window.innerWidth;
+balloonCanvas.height=window.innerHeight;
+let balloons=[];
+function createBalloons(){for(let i=0;i<20;i++){balloons.push({x:Math.random()*balloonCanvas.width,y:balloonCanvas.height+Math.random()*300,r:20+Math.random()*15,color:randomColor(),speed:1+Math.random()*2});}}
+function drawBalloons(){bctx.clearRect(0,0,balloonCanvas.width,balloonCanvas.height); balloons.forEach(b=>{bctx.fillStyle=b.color;bctx.beginPath();bctx.ellipse(b.x,b.y,b.r*0.7,b.r,0,0,Math.PI*2);bctx.fill(); b.y-=b.speed;if(b.y<-50)b.y=balloonCanvas.height;}); requestAnimationFrame(drawBalloons);}
+createBalloons(); drawBalloons();
 
-  function randomColor() {
-    const colors = ['#ff6f91','#ff9671','#ffc75f','#f9f871','#a0e7e5','#43e97b','#38f9d7'];
-    return colors[Math.floor(Math.random()*colors.length)];
-  }
-
-  function createConfetti(){for(let i=0;i<200;i++){confetti.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*8+2,d:Math.random()*50,color:randomColor()});}}
-  function drawConfetti(){ctx.clearRect(0,0,canvas.width,canvas.height);confetti.forEach(c=>{ctx.fillStyle=c.color;ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.fill();});updateConfetti();}
-  function updateConfetti(){confetti.forEach((c,i)=>{c.y+=Math.cos(c.d)+2;c.x+=Math.sin(c.d);if(c.y>canvas.height){confetti[i]={x:Math.random()*canvas.width,y:-10,r:c.r,d:c.d,color:c.color};}});}
-  function startConfetti(){createConfetti();setInterval(drawConfetti,20);}
-
-  // Balloons animation
-  const balloonCanvas = document.getElementById('balloons');
-  const bctx = balloonCanvas.getContext('2d');
-  balloonCanvas.width = window.innerWidth;
-  balloonCanvas.height = window.innerHeight;
-  let balloons=[];
-  function createBalloons(){for(let i=0;i<20;i++){balloons.push({x:Math.random()*balloonCanvas.width,y:balloonCanvas.height+Math.random()*300,r:20+Math.random()*15,color:randomColor(),speed:1+Math.random()*2});}}
-  function drawBalloons(){bctx.clearRect(0,0,balloonCanvas.width,balloonCanvas.height);balloons.forEach(b=>{bctx.fillStyle=b.color;bctx.beginPath();bctx.ellipse(b.x,b.y,b.r*0.7,b.r,0,0,Math.PI*2);bctx.fill();b.y-=b.speed;if(b.y<-50){b.y=balloonCanvas.height+Math.random()*100;b.x=Math.random()*balloonCanvas.width;}});requestAnimationFrame(drawBalloons);}
-  createBalloons();
-  drawBalloons();
-
-  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;balloonCanvas.width=window.innerWidth;balloonCanvas.height=window.innerHeight;});
+window.addEventListener('resize',()=>{canvas.width=balloonCanvas.width=window.innerWidth; canvas.height=balloonCanvas.height=window.innerHeight;});
 </script>
 
 </body>
