@@ -41,6 +41,10 @@
       color: #ffd700;
       text-shadow: 2px 2px 10px #ff69b4, 0 0 20px #ff69b4;
       margin-bottom: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
     }
 
     h1 {
@@ -86,7 +90,7 @@
       #countdown { font-size: 2rem; }
       h1 { font-size: 1.5rem; }
       #typing { font-size: 1rem; }
-      .date { font-size: 1.2rem; }
+      .date { font-size: 1.2rem; gap: 6px; }
       .time-labels { font-size: 0.8rem; gap: 8px; }
     }
 
@@ -102,7 +106,10 @@
 
 <div class="container d-flex justify-content-center align-items-center" style="height:100vh;">
   <div class="card text-center">
-    <div class="date">📅 27 March</div>
+    <div class="date">
+      <img src="https://em-content.zobj.net/thumbs/120/apple/325/calendar_1f4c5.png" alt="Calendar" style="width:30px; vertical-align:middle;">
+      27 March
+    </div>
 
     <h1>🎂 Aisha, it's your Birthday!</h1>
     <div id="typing"></div>
